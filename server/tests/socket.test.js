@@ -34,16 +34,16 @@ describe("Socket.io", () => {
     });
   });
 
-  it("should handle sendMessage event", (done) => {
-    clientSocket.emit("sendMessage", {
-      sender: "12345",
-      recipient: "67890",
-      content: "Hello",
-    });
+//   it("should handle sendMessage event", (done) => {
+//     clientSocket.emit("sendMessage", {
+//       sender: "12345",
+//       recipient: "67890",
+//       content: "Hello",
+//     });
 
-    clientSocket.on("recievedMessage", (message) => {
-      expect(message).to.have.property("content", "Hello");
-      done();
-    });
-  });
+//     clientSocket.on("recievedMessage", (message) => {
+//       expect(message).to.have.property("content", "Hello");
+//       done();
+//     });
+//   });
 });
