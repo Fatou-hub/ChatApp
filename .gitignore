@@ -1,11 +1,6 @@
-# Ignore node_modules folders
-/client/node_modules/
-/server/node_modules/
-node_modules/
-
-# Ignore package-lock.json files
-package-lock.json
-package.json
-# Ignore other files you don't want to push to GitHub
 .env
-.DS_Store
+client/.env
+server/.env
+node_modules/
+client/node_modules/
+server/node_modules/

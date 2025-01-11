@@ -38,36 +38,81 @@ export const signup = async(request, response, next) => {
 
 export const login = async(request, response, next) => {
     try {
+         // Log initial pour vérifier si la fonction est appelée
+         console.log("Login function called.");
+
+         // Log pour vérifier le contenu du corps de la requête
+         console.log("Request body:", request.body);
+
         const {email, password} = request.body;
         if(!email || !password ){
+            console.log("Missing email or password."); // Log si les champs sont vides
+
             return response.status(400).send("email and password are required.");
         }
+         // Log pour confirmer que l'email est récupéré correctement
+         console.log("Email provided:", email);
+
         const user = await User.findOne({ email });
+
+         // Log si l'utilisateur n'est pas trouvé
         if(!user){
+            console.log(`No user found with email: ${email}`);
             return response.status(404).send("user with written email does not exist.");
         }
+
+        // Log pour confirmer que l'utilisateur a été trouvé
+        console.log("User found:", user);
+
         const auth = await compare(password, user.password);
         if(!auth){
             return response.status(400).send("filled password is not correct.");
         }
+
+        // Log pour confirmer que l'utilisateur est authentifié
+        console.log("User authenticated successfully.");
+
+        // Log pour voir les informations contenues dans le token
+        const token = createToken(email, user.id);
+        console.log("Generated token:", token);
+
         response.cookie("jwt", createToken(email, user.id), {
             maxAge,
             secure:true,
             sameSite: "None",
         });
-        return response.status(200).json({
-            user:{
-                id:user.id,
-                email:user.email,
-                profileSetup:user.profileSetup,
-                firstName:user.firstName,
-                lastName:user.lastName,
-                image:user.image,
-                color:user.color,
-            },
-        });
+
+         // Log pour confirmer que le cookie a été défini
+         console.log("JWT cookie set successfully.");
+         
+        // return response.status(200).json({
+        //     user:{
+        //         id:user.id,
+        //         email:user.email,
+        //         profileSetup:user.profileSetup,
+        //         firstName:user.firstName,
+        //         lastName:user.lastName,
+        //         image:user.image,
+        //         color:user.color,
+        //     },
+        // });
+        // Log pour vérifier la réponse envoyée
+        const userResponse = {
+            id: user.id,
+            email: user.email,
+            profileSetup: user.profileSetup,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            image: user.image,
+            color: user.color,
+        };
+        console.log("Response data:", userResponse);
+
+        return response.status(200).json({ user: userResponse });
     } catch (error) {
-        console.log({error});
+         // Log pour capturer et afficher les erreurs
+         console.log("Error in login function:", error);
+        // console.log({error});
         return response.status(500).send("Erreur du Serveur interne !")
     }
 };
