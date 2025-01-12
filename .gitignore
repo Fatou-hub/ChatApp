@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 .vscode/
 client/.env
 client/node_modules/
 server/.env
+=======
+.env
+client/.env
+server/.env
+node_modules/
+client/node_modules/
+>>>>>>> e26f506ac6b32f451925f8689f71417bc22de7a3
 server/node_modules/
