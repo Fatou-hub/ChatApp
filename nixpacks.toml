@@ -1,0 +1,25 @@
+[build]
+# dossier backend (Node.js)
+path = "server"
+
+# version de Node.js 
+builder = "node:20.17.0"
+
+[build.args]
+# Définir l'environnement de build comme production
+env = ["NODE_ENV=production"]
+
+[install]
+# Installer les dépendances pour client (React) et serveur (Node.js)
+commands = [
+  "cd client && npm install",   # Installation des dépendances React
+  "cd server && npm install"    # Installation des dépendances backend
+]
+
+[dev]
+# Commande pour démarrer le serveur React en mode développement
+command = "cd client && npm run dev"
+
+[serve]
+# Commande pour démarrer le serveur Node.js en production
+command = "cd server && npm run start"
