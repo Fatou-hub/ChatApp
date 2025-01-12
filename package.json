@@ -9,6 +9,8 @@
     "dev-server": "npm run dev --prefix server"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
+    "vite": "^6.0.7"
   }
 }
