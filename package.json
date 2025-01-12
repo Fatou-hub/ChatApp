@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
- "scripts": {
+  "scripts": {
     "start": "concurrently \"npm run dev-client\" \"npm run dev-server\"",
     "start-client": "npm start --prefix client",
     "start-server": "npm start --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
-
-
